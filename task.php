@@ -36,9 +36,8 @@ class Task{
           $this->token =  $token->access_token;
           return true;
         }
-    
-    
     }
+
     public function getDataFromWeatherMap(){
         $api_data = 'https://api.openweathermap.org/data/2.5/weather?lat='.$this->lat.'&lon='.$this->lon.'&appid='.$this->whetherAppId;
         $json = file_get_contents($api_data);
@@ -46,20 +45,13 @@ class Task{
         $mainTemp = $decode_json->main->temp;
         // $K_to_C  Kelvin to Celius
         $K_to_C = $mainTemp - 273;
-
-        // echo $this->application_id ."<br>";
-        // echo $this->secret ."<br>";
-        // echo $this->lat ."<br>";
-        // echo $this->lon ."<br>";
-        // echo $this->whetherAppId ."<br>";
-        // echo $this->phone ."<br>";
-        // die();
        if($K_to_C > 20){
         return 'Kaleemullah and Temperature more than 20C. <'.$K_to_C.'>';
        }else{
         return  'Kaleemullah and Temperature less than 20C. <'.$K_to_C.'>';
        }
     }
+
     public function sendMessageToUser(){
     $curl = curl_init();
     $text = $this->getDataFromWeatherMap();
@@ -86,33 +78,7 @@ class Task{
     if ($err) {
       return false;
     } else {
-    //   echo $response;
       return true;
     }
     }
 }
-// $task = new Task();
-// $task->application_id = '62401e082d985400016d1a92:';
-// $task->secret = 'toVqY7OVMN';
-// $task->lat= 35;
-// $task->lon = 139;
-// $task->whetherAppId = 'b385aa7d4e568152288b3c9f5c2458a5';
-// $check = $task->sendMessageToUser();
-// $message =  "Message sent to user";
-// if($check == false){
-//     $message =  "Message didn't send to user";
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-    
-?>
